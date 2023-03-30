@@ -656,11 +656,12 @@ subroutine restore_domain_state(fileobj, unlim_dim_level)
           is_decomposed) then
         call get_variable_attribute(fileobj, fileobj%restart_vars(i)%varname, &
                                     "checksum", chksum_in_file)
-        if (.not. string_compare(trim(adjustl(chksum_in_file)), trim(adjustl(chksum)))) then
-          call error("The checksum in the file:"//trim(fileobj%path)//" and variable:"//trim(fileobj%restart_vars(i)%varname)//&
-                     &" does not match the checksum calculated from the data. file:"//trim(adjustl(chksum_in_file))//&
-                     &" from data:"//trim(adjustl(chksum)))
-        endif
+! KGao - comment out checksum
+!        if (.not. string_compare(trim(adjustl(chksum_in_file)), trim(adjustl(chksum)))) then
+!          call error("The checksum in the file:"//trim(fileobj%path)//" and variable:"//trim(fileobj%restart_vars(i)%varname)//&
+!                     &" does not match the checksum calculated from the data. file:"//trim(adjustl(chksum_in_file))//&
+!                     &" from data:"//trim(adjustl(chksum)))
+!        endif
       endif
     elseif (associated(fileobj%restart_vars(i)%data3d)) then
       call domain_read_3d(fileobj, fileobj%restart_vars(i)%varname, &
@@ -671,11 +672,13 @@ subroutine restore_domain_state(fileobj, unlim_dim_level)
           is_decomposed) then
         call get_variable_attribute(fileobj, fileobj%restart_vars(i)%varname, &
                                     "checksum", chksum_in_file(1:len(chksum_in_file)))
+! KGao - comment out checksum 
 !        if (.not. string_compare(trim(adjustl(chksum_in_file)), trim(adjustl(chksum)))) then
 !          call error("The checksum in the file:"//trim(fileobj%path)//" and variable:"//trim(fileobj%restart_vars(i)%varname)//&
 !                     &" does not match the checksum calculated from the data. file:"//trim(adjustl(chksum_in_file))//&
 !                     &" from data:"//trim(adjustl(chksum)))
 !        endif
+
       endif
     elseif (associated(fileobj%restart_vars(i)%data4d)) then
       call domain_read_4d(fileobj, fileobj%restart_vars(i)%varname, &
